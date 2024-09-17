@@ -1,0 +1,6 @@
+namespace TaskManagerBackend.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}

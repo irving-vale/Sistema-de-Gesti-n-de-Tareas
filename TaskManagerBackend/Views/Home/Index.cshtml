@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Task Manager";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/styles.css")">
+    <script src="@Url.Content("~/Scripts/app.js")"></script>
+</head>
+<body ng-app="taskManagerApp">
+    <div ng-controller="TaskController">
+        <h1>Gestión de Tareas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tarea in tareas">
+                    <td>{{tarea.Id}}</td>
+                    <td>{{tarea.Titulo}}</td>
+                    <td>{{tarea.Descripcion}}</td>
+                    <td>{{tarea.Estado ? 'Completada' : 'Pendiente'}}</td>
+                    <td>
+                        <button ng-click="editTask(tarea)">Editar</button>
+                        <button ng-click="deleteTask(tarea.Id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>{{editMode ? 'Editar' : 'Añadir'}} Tarea</h2>
+        <form ng-submit="submitTask()">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" ng-model="task.Titulo" placeholder="Título" required />
+
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" ng-model="task.Descripcion" placeholder="Descripción"></textarea>
+
+            <label for="estado">
+                <input type="checkbox" id="estado" ng-model="task.Estado"> Completada
+            </label>
+
+            <button type="submit">{{editMode ? 'Actualizar' : 'Crear'}} Tarea</button>
+        </form>
+    </div>
+
+    
+
+</body>
+</html>
